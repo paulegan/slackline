@@ -56,6 +56,7 @@ func main() {
 	m := martini.Classic()
 	m.Post("/bridge", func(res http.ResponseWriter, req *http.Request) {
 		username := req.PostFormValue("user_name")
+		teamDomain := req.PostFormValue("team_domain")
 		text := req.PostFormValue("text")
 
 		if username == "slackbot" {
@@ -64,7 +65,7 @@ func main() {
 		}
 
 		msg := slackMessage{
-			Username: username,
+			Username: username + " (" + teamDomain + ")",
 			Text:     text,
 		}
 
